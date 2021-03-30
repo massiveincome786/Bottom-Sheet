@@ -1,0 +1,140 @@
+XML CODE.......
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <Button
+        android:id="@+id/openBottomSheetButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Open Bottom Sheet" />
+
+
+
+</LinearLayout>
+
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_green_light"
+    android:clipToPadding="true"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="random_title"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="lorem_ipsum"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@android:color/holo_blue_bright"
+        android:clipToPadding="true"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="random_title"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="lorem_ipsum"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+........................................................................................................
+
+JAVA CODE
+
+......................................................................................................
+
+package com.example.paperpreacticstask;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+public class MainActivity extends AppCompatActivity {
+    private BottomSheetBehavior mBottomSheetBehaviour,mBottomSheetBehaviour2;
+    Button openbtn;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        View nestedScrollView = (View) findViewById(R.id.nestedScrollView);
+        mBottomSheetBehaviour = BottomSheetBehavior.from(nestedScrollView);
+
+        View nestedScrollView2 = (View) findViewById(R.id.nestedScrollView2);
+        mBottomSheetBehaviour2 = BottomSheetBehavior.from(nestedScrollView2);
+        mBottomSheetBehaviour2.setPeekHeight(0);
+
+        openbtn=findViewById(R.id.openBottomSheetButton);
+
+
+        openbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBottomSheetBehaviour.setState(BottomSheetBehavior.STATE_EXPANDED);
+                mBottomSheetBehaviour2.setPeekHeight(100);
+                mBottomSheetBehaviour2.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
+
+    }
+}
